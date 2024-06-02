@@ -1,0 +1,42 @@
+# This sample Zombienet configuration file can be used to spawn a local network with a relaychain
+# and a substrate-contracts-node parachain.
+#
+# Requirements:
+# - Install zombienet from https://github.com/paritytech/zombienet/releases.
+# - Build `polkadot`, `polkadot-execute-worker` and `polkadot-prepare-worker` from `polkadot-sdk` and make the binaries available in your path.
+# - Build or install `substrate-contracts-node` and make the binary available in your path.
+#
+# Usage:
+# zombienet spawn --provider native zombienet.toml
+#
+[relaychain]
+chain = "rococo-local"
+default_command = "./bin/polkadot"
+
+[[relaychain.nodes]]
+name = "alice"
+args = [
+  "--alice",
+  "-lerror,runtime::contracts=trace,xcm=trace,runtime::xcm=trace,runtime::xcmp=info",
+]
+validator = true
+
+[[relaychain.nodes]]
+name = "bob"
+args = [
+  "--bob",
+  "-lerror,runtime::contracts=trace,xcm=trace,runtime::xcm=trace,runtime::xcmp=info",
+]
+validator = true
+
+[[parachains]]
+id = 1000
+addToGenesis = true
+cumulus_based = true
+
+[parachains.collator]
+name = "parachain-collator01"
+command = "./target/release/parachain-template-node"
+args = [
+  "-lerror,runtime::contracts=trace,xcm=trace,runtime::xcm=trace,runtime::xcmp=info",
+]
