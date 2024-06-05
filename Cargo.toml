@@ -6,7 +6,12 @@ repository = "https://github.com/paritytech/polkadot-sdk-parachain-template.git"
 edition = "2021"
 
 [workspace]
-members = ["node", "pallets/template", "runtime"]
+members = [
+  "node",
+  "runtime",
+  "contracts_examples/flipper",
+  "contracts_examples/error_example",
+]
 resolver = "2"
 
 [workspace.lints.rust]
