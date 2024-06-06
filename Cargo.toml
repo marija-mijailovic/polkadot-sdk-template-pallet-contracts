@@ -7,9 +7,10 @@ edition = "2021"
 
 [workspace]
 members = [
-    "node",
-    "pallets/template",
-    "runtime",
+  "node",
+  "runtime",
+  "contracts_examples/flipper",
+  "contracts_examples/error_example",
 ]
 resolver = "2"
 
